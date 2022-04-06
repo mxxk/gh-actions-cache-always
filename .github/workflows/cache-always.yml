@@ -1,0 +1,31 @@
+name: A sample workflow using tweaked actions/cache@v3
+on: push
+jobs:
+  cache-demo:
+    runs-on: ubuntu-latest
+    steps:
+      # Instead of running `actions/cache@v3` directly, check it out locally.
+      - name: Checkout actions/cache@v3
+        uses: actions/checkout@v3
+        with:
+          repository: actions/cache
+          ref: v3
+          path: .tmp/actions/cache
+      - name: Make actions/cache@v3 run always, not only when job succeeds
+        # Tweak `action.yml` of `actions/cache@v3` to remove its `post-if`
+        # condition, making it default to `post-if: always()`.
+        run: |
+          sed -i -e '/ post-if: /d' .tmp/actions/cache/action.yml
+      - name: Cache data
+        id: cache
+        uses: ./.tmp/actions/cache
+        with:
+          path: cached.txt
+          key: constant-key
+      - name: Generate data to be cached
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          echo "Hello, cache!" >cached.txt
+      - name: Always fail
+        run: |
+          exit 1
