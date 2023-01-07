@@ -37,7 +37,7 @@ runs:
 
     - name: Cache
       id: cache
-      uses: ./.github/.tmp/cache-always/actions/cache
+      uses: ./.github/.tmp/cache-always
       with:
         path: ${{ inputs.path }}
         key: ${{ inputs.key }}
