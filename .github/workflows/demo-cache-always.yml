@@ -4,7 +4,9 @@ jobs:
   cache-demo:
     runs-on: ubuntu-latest
     steps:
-      # Use `uses: ./.github/actions/cache-always` instead of calling `actions/cache@v3` directly or using `uses: actions/cache@v3`.
+      # Use `uses: ./.github/actions/cache-always`,
+      # instead of calling `actions/cache@v3` directly
+      # or using `uses: actions/cache@v3`:
       - name: Cache data
         id: cache
         uses: ./.github/actions/cache-always
