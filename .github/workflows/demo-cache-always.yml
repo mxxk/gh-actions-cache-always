@@ -1,0 +1,20 @@
+name: 'Example of a workflow using the "live patched" `actions/cache@v3` in `.github/actions/cache-always.yml`'
+on: push
+jobs:
+  cache-demo:
+    runs-on: ubuntu-latest
+    steps:
+      # Use `uses: ./.github/actions/cache-always` instead of calling `actions/cache@v3` directly or using `uses: actions/cache@v3`.
+      - name: Cache data
+        id: cache
+        uses: ./.github/actions/cache-always
+        with:
+          path: cached.txt
+          key: constant-key
+
+      - name: Generate data to be cached
+        if: ${{ steps.cache.outputs.cache-hit != 'true' }}
+        run: echo "Hello, cache!" > cached.txt
+
+      - name: Always fail
+        run: exit 1  # And now still caches `cached.txt`
