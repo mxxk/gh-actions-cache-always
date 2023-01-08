@@ -29,14 +29,14 @@ runs:
       with:
         repository: actions/cache
         ref: v3
-        path: ./.github/.tmp/cache-always
+        path: ./.github/.tmp/actions/always-cache
 
     - name: 'Patch actions/cache@v3 to make it cache data also when the job fails'
-      run: sed -i 's/post-if: success()$/post-if: ${{ success() || failure() }}/' ./.github/.tmp/cache-always/action.yml
+      run: sed -i 's/post-if: success()$/post-if: ${{ success() || failure() }}/' ./.github/.tmp/actions/always-cache/action.yml
 
     - name: Cache
       id: cache
-      uses: ./.github/.tmp/cache-always
+      uses: ./.github/.tmp/actions/always-cache
       with:
         path: ${{ inputs.path }}
         key: ${{ inputs.key }}
