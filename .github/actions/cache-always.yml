@@ -24,16 +24,15 @@ runs:
   using: 'composite'
   steps:
     # Instead of running `actions/cache@v3` directly, check it out locally.
-    - name: Checkout actions/cache@v3
+    - name: 'Checkout actions/cache@v3'
       uses: actions/checkout@v3
       with:
         repository: actions/cache
         ref: v3
         path: ./.github/.tmp/cache-always
 
-    - name: Patch actions/cache@v3 to make it cache data also when the job fails
+    - name: 'Patch actions/cache@v3 to make it cache data also when the job fails'
       run: sed -i 's/post-if: success()$/post-if: ${{ success() || failure() }}/' ./.github/.tmp/cache-always/action.yml
-      shell: bash
 
     - name: Cache
       id: cache
