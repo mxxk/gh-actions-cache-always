@@ -1,4 +1,4 @@
-name: 'Example of a workflow using the "live patched" `actions/cache@v3` in `.github/actions/cache-always.yml`'
+name: 'Example of a workflow using the "live patched" `actions/cache@v3` in `.github/actions/cache-always`'
 on: push
 jobs:
   cache-demo:
