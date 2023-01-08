@@ -1,4 +1,4 @@
-## "Live patching" of `actions/cache@v3` so it always saves to cache
+### "Live patching" of `actions/cache@v3` so it always saves to cache
 
 GitHub's action `actions/cache@v3` only saves data in the cache, if the job succeeds.  There has been much interest in letting `actions/cache` save data in the cache even if the job fails, see [its issue \#92](https://github.com/actions/cache/issues/92)<br />
 Note that GitHub has provided [an alternative solution](https://github.com/actions/cache/discussions/1020) by creating two new actions `actions/save` and `actions/restore` in December 2022, but this requires significant changes to extant workflows which use GitHub's classic [`actions/cache`](https://github.com/actions/cache), plus all three actions continue to be maintained by GitHub (so they say]())..
